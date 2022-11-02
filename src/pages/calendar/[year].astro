@@ -1,0 +1,21 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { yearToEvilArthasYear } from '../../lib/date-tools';
+
+const year = Astro.params.year;
+if (typeof year !== 'string') {
+  return Astro.redirect('/404');
+}
+const numberYear = parseInt(year, 10);
+const eaYear = yearToEvilArthasYear(numberYear);
+
+if (eaYear === null) {
+  return Astro.redirect('/no-data');
+}
+---
+
+<Layout title={`EvilArthas Calendar | ${eaYear}`}>
+  <div>
+    {eaYear}
+  </div>
+</Layout>
